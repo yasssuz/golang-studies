@@ -26,6 +26,7 @@ func main() {
 	// By putting all those 3 phases together, we are able to calculate how much time GC took.
 	// Usually, is between 200 micro-seconds and 1 milli-second
 
+	// Before GC process, GC sets a goal in space.
 	// The first and the last phase are blockers, which means, no process is running at that time.
 	// GOGC tries to keep both of these processes under or at 100 micro-seconds.
 	// On the other hand, Marking process is concurrent and will be running parallel to other processes.
@@ -34,6 +35,12 @@ func main() {
 
 	// After "Mark start", when the processes come back to being executed, GOGC will need some CPU to continue to run it's processes.
 	// GOGC will take exactly 25% of CPU available to do its "Marking" job. So, in a 4 core CPU, with 4 go routines running, while
-	// on "Marking" phase, one of the cores will be assigned to garbage collection, and the other 3 routines will contiune with
-	// application processes.
+	// on "Marking" phase, 25% (in this case, one of the cores) will be assigned to garbage collection, and the rest 75% (3 routines)
+	//  will contiune with application processes.
+
+	// However, in some situations, GC will notice that he will not be able to reach its goal.
+	// In those situations, GC will get a "Mark assistant" which will reduce application processes to 20%, and assign
+	// 80% to GC. However, in those situations, Mork assistant will not be running it's process for 100& of GC Marking time,
+	// in fact, it will be just a percentage of the time. For instance, it may be running only on 10% of the Marking phase, or
+	// 10 micro-seconds out of 100 micro-seconds.
 }
