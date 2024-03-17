@@ -39,6 +39,9 @@ func zeroValueVariables() {
 	// Represents a boolean, which is 1 bit (and a full byte) of allocation
 	// "zero-value" is false
 	var d bool
+
+	// As a rule of thumb, int, string, float and bool are types made to be efficiently copied.
+	// So, whenever possible, prefer copying them over pointing.h
 }
 
 func valueVariables() {
@@ -51,8 +54,8 @@ func valueVariables() {
 	// Represents type string
 	bb := "hello"
 	// Two word string value is:
-	// [h] [e] [l] [l] [o]
-	// - Pointer pointing at [h]
+	// [[h] [e] [l] [l] [o]] -> byte array
+	// - Pointer pointing at the array
 	// - Int with value 5
 
 	// Represents type float64
