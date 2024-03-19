@@ -64,4 +64,8 @@ func main() {
 	// on the heap and indirection, regardless of the data semmantics we are working with.
 	// If you want to do the fastest possible Go code, you can't be decoupling the code. Allocations on
 	// the heap will cause garbagge collector to be involved, which will create latency.
+
+	// In the end of the day, we are not trying nto create the fastest program as possible, but a program
+	// which is just fast enough. Creating productive allocation which is going to make our life easier is the correct
+	// path to follow.
 }
