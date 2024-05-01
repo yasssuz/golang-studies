@@ -18,6 +18,9 @@ type Admin struct {
 	// An issue tho, is that if the struct has a conflicting key, the go compiler will not notify you of that and
 	// this can create bugs.
 
+	// A general guideline for Embedding is that, you should most of the times do it for behavior rather than
+	// concrete data. Is cheaper to duplicate than to have wrong abstractions.
+
 	// User User -> you could also do this way, but you'd lose the features above mentioned.
 }
 
